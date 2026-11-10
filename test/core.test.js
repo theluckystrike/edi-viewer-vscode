@@ -196,3 +196,9 @@ test('functional group or transaction set without ISA still reads', () => {
   assert.strictEqual(m.transactions.length, 1);
   assert.deepStrictEqual(errs(m), []);
 });
+
+test('855 header segments shared with the 850 (CSH, TC2, PAM, INC) are not flagged', () => {
+  const t = F.x12(['855']).replace(/(BAK\*[^~]*~)/, '$1CSH****123MILL 0001~TC2*A*X~PAM*1~INC*30~');
+  const m = E.parse(t);
+  assert.ok(!m.problems.some((p) => /CSH|TC2|PAM|INC/.test(p.msg)), errs(m).join('\n'));
+});

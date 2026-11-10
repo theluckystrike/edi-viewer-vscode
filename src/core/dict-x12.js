@@ -243,7 +243,7 @@ const CODES = {
 const SETS = {
   '850': { n: 'Purchase order', segs: 'ST BEG CUR REF PER TAX FOB CTP PAM CSH TC2 SAC ITD DIS INC DTM LDT LIN SI PID MEA PWK PKG TD1 TD5 TD3 TD4 MAN PCT CTB TXI AMT N9 MSG N1 N2 N3 N4 NX2 PO1 PO3 PO4 REF SCH SLN LS LE CTT SE QTY SDQ ADV',
     top: ['N9', 'N1', 'PO1'], loops: { N9: [], N1: [], PO1: ['N9', 'N1', 'SLN'], SLN: [] }, summary: ['CTT', 'SE'] },
-  '855': { n: 'Purchase order acknowledgment', segs: 'ST BAK CUR REF PER TAX FOB CTP SAC ITD DIS DTM LDT LIN PID MEA PWK PKG TD1 TD5 TD3 TD4 MAN CTB TXI N9 MSG N1 N2 N3 N4 PO1 PO3 PO4 ACK SCH SLN CTT AMT SE',
+  '855': { n: 'Purchase order acknowledgment', segs: 'ST BAK CUR REF PER TAX FOB CTP PAM CSH TC2 SAC ITD DIS INC DTM LDT LIN SI PID MEA PWK PKG TD1 TD5 TD3 TD4 MAN PCT CTB TXI N9 MSG N1 N2 N3 N4 NX2 PO1 PO3 PO4 QTY ACK SCH SLN LS LE CTT AMT SE',
     top: ['N9', 'N1', 'PO1'], loops: { N9: [], N1: [], PO1: ['ACK', 'N1', 'SLN'], ACK: [], SLN: [] }, summary: ['CTT', 'SE'] },
   '810': { n: 'Invoice', segs: 'ST BIG NTE CUR REF YNQ PER N1 N2 N3 N4 ITD DTM FOB PID MEA PWK PKG L7 BAL INC PAM IT1 CRC QTY CUR IT3 TXI CTP PO4 SDQ DTM CAD L7 SR SAC ITA SLN N9 MSG TDS TXI CAD AMT ISS CTT SE',
     top: ['N1', 'IT1'], loops: { N1: [], IT1: ['SLN', 'N1'], SLN: [] }, summary: ['TDS', 'CTT', 'SE'] },
