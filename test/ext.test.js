@@ -158,7 +158,7 @@ test('text editor: hover names, diagnostics from the worker, format and minify',
     const hp = s.hoverProviders[0];
     const at = doc._text.indexOf('INV-555') + 2;
     const hv = hp.provideHover(doc, doc.positionAt(at));
-    assert.match(hv.contents.value.replace(/\\/g, ''), /\*\*BIG02\*\* · Invoice number \(mandatory\)/);
+    assert.match(hv.contents.value, /`BIG02` · Invoice number \(mandatory\)/);
     assert.match(hv.contents.value, /Value: `INV-555`/);
     const n1 = hp.provideHover(doc, doc.positionAt(doc._text.indexOf('N1*RE') + 3));
     assert.match(n1.contents.value.replace(/\\/g, ''), /N101.*Value: `RE` = Party to receive the payment \(remit to\)/s);
