@@ -25,12 +25,13 @@ function hoverMarkdown(vscode, det, r) {
   md.isTrusted = false;
   md.supportHtml = false;
   const esc = (s) => String(s).replace(/[\\`*_{}[\]()#+\-.!|<>]/g, '\\$&');
+  const code = (s) => String(s).replace(/[`\r\n]/g, ''); // inside a code span nothing needs escaping, only no backtick
   if (r.index === 0) {
-    md.appendMarkdown(`**${esc(r.tag)}**${d.name ? ` · ${esc(d.name)}` : ' · segment not in the dictionary'}`);
+    md.appendMarkdown(`\`${code(r.tag)}\`${d.name ? ` · ${esc(d.name)}` : ' · segment not in the dictionary'}`);
     if (d.desc) md.appendMarkdown(`\n\n${esc(d.desc)}`);
     return md;
   }
-  md.appendMarkdown(`**${esc(d.id)}**${d.name ? ` · ${esc(d.name)}` : ''}${d.compName ? ` · ${esc(d.compName)}` : ''}${d.required ? ' (mandatory)' : ''}`);
+  md.appendMarkdown(`\`${code(d.id)}\`${d.name ? ` · ${esc(d.name)}` : ''}${d.compName ? ` · ${esc(d.compName)}` : ''}${d.required ? ' (mandatory)' : ''}`);
   let v = r.value;
   if (det.standard === 'edifact') v = E.unescape(E.splitRaw(r.value, det.sep.component, det.sep.release)[(r.component || 1) - 1] || '', det.sep.release);
   if (v !== '') md.appendMarkdown(`\n\nValue: \`${String(v).replace(/`/g, "'").slice(0, 200)}\`${d.meaning ? ` = ${esc(d.meaning)}` : ''}`);

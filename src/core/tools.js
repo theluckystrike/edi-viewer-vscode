@@ -234,7 +234,7 @@ function changeRow(a, b, i, j, ignore) {
 function mdEsc(s) { return String(s).replace(/\|/g, '\\|').replace(/[<>]/g, (c) => (c === '<' ? '&lt;' : '&gt;')).replace(/\r?\n/g, ' '); }
 
 function compareMarkdown(r, nameA, nameB) {
-  const out = [`# EDI comparison: ${mdEsc(nameA)} and ${mdEsc(nameB)}`, ''];
+  const out = [`# EDI comparison of ${mdEsc(nameA)} and ${mdEsc(nameB)}`, ''];
   if (r.error) return out.concat([r.error, '']).join('\n');
   out.push(`${r.segmentsA} segments in ${mdEsc(nameA)}, ${r.segmentsB} in ${mdEsc(nameB)}. ${r.same} the same, ${r.changed} changed, ${r.added} added, ${r.removed} removed.${r.ignoreControl ? ' Control numbers and envelope dates and times were ignored.' : ''}`, '');
   if (!r.rows.length) { out.push('The files have the same segments.', ''); return out.join('\n'); }
@@ -264,7 +264,7 @@ function reportRow(rel, m, err) {
 function reportMarkdown(rows, root, stopped) {
   const ok = rows.filter((r) => r.status === 'ok').length;
   const bad = rows.filter((r) => r.status === 'errors').length;
-  const out = [`# EDI folder check: ${mdEsc(root)}`, '', `${rows.length} EDI file${rows.length === 1 ? '' : 's'} checked: ${ok} without problems, ${bad} with errors, ${rows.filter((r) => r.status === 'warnings').length} with warnings only, ${rows.filter((r) => r.status === 'not read').length} not read.${stopped ? ' The check was stopped before the end.' : ''}`, ''];
+  const out = [`# EDI folder check of ${mdEsc(root)}`, '', `${rows.length} EDI file${rows.length === 1 ? '' : 's'} checked: ${ok} without problems, ${bad} with errors, ${rows.filter((r) => r.status === 'warnings').length} with warnings only, ${rows.filter((r) => r.status === 'not read').length} not read.${stopped ? ' The check was stopped before the end.' : ''}`, ''];
   out.push('| File | Standard | Status | Errors | Warnings | Transactions | Types | Sender | Receiver | First problem |', '|---|---|---|---|---|---|---|---|---|---|');
   for (const r of rows) out.push(`| ${mdEsc(r.file)} | ${r.standard} | ${r.status} | ${r.errors} | ${r.warnings} | ${r.transactions} | ${mdEsc(r.types)} | ${mdEsc(r.from)} | ${mdEsc(r.to)} | ${mdEsc(r.first)} |`);
   return out.join('\n') + '\n';

@@ -76,7 +76,7 @@ test('compare: same file, changed quantity, added and removed segments, control 
   const strict = T.compareModels(a, b, { ignoreControl: false });
   assert.ok(strict.rows.some((x) => x.tag === 'ISA' && x.diffs.some((d) => d.id === 'ISA13')));
   const md = T.compareMarkdown(r, 'a.edi', 'b.edi');
-  assert.match(md, /^# EDI comparison: a\.edi and b\.edi/);
+  assert.match(md, /^# EDI comparison of a\.edi and b\.edi/);
   assert.match(md, /PO102 \(Quantity ordered\): `10` → `12`/);
   assert.match(md, /Control numbers and envelope dates and times were ignored/);
   assert.match(T.compareModels(a, E.parse(F.edifact(['ORDERS']))).error, /One file is X12, the other EDIFACT/);

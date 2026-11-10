@@ -127,7 +127,7 @@ test('compare: cancel on the file or the option keeps the try; a comparison on s
     assert.ok(c.result.rows[0].diffs.some((d) => d.id === 'PO102'));
     assert.strictEqual(s.state.get('ediViewer.proTrial').compare, 1);
     await v.send({ type: 'saveCompare' });
-    assert.match(s.log.opened.at(-1).getText(), /# EDI comparison: po-1001\.edi and po-1001-v2\.edi/);
+    assert.match(s.log.opened.at(-1).getText(), /# EDI comparison of po-1001\.edi and po-1001-v2\.edi/);
   } finally { s.restore(); }
 });
 
