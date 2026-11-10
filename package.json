@@ -327,11 +327,11 @@
       "commandPalette": [
         {
           "command": "ediViewer.format",
-          "when": "editorLangId == edi"
+          "when": "editorLangId == edi || resourceLangId == edi && activeEditor == 'workbench.editors.files.textFileEditor'"
         },
         {
           "command": "ediViewer.minify",
-          "when": "editorLangId == edi"
+          "when": "editorLangId == edi || resourceLangId == edi && activeEditor == 'workbench.editors.files.textFileEditor'"
         },
         {
           "command": "ediViewer.exportJson",

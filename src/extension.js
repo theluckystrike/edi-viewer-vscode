@@ -48,8 +48,11 @@ class Viewer {
   async load() {
     try {
       const src = await jobSource(this.uri);
-      this.model = await runJob({ op: 'parse', ...src }, { transfer: src.buffer ? [src.buffer] : [] });
-      await this.post({ type: 'model', model: this.model, name: this.name, pro: proState() });
+      const model = await runJob({ op: 'parse', ...src }, { transfer: src.buffer ? [src.buffer] : [] });
+      await this.post({ type: 'model', model, name: this.name, pro: proState() });
+      // The webview keeps the model; the host needs only the byte order mark flag (for reveal), so a large file is
+      // not held twice while its viewer is open.
+      this.model = { bom: !!model.bom };
     } catch (e) {
       const soft = ['NOT_EDI', 'TOO_LARGE', 'ENOENT'].includes(e.code);
       if (!soft) rating.failure();
@@ -144,8 +147,9 @@ async function exportEdi(from, kind) {
   try { res = await runJob({ op: 'export', kind, name: t.name, ...(await sourceFor(t)) }, { idleMs: 30000 }); } catch (e) { vscode.window.showWarningMessage(`Export: ${e.message}`); return; }
   const body = kind === 'csv' ? res.csv : res.json;
   await vscode.workspace.fs.writeFile(target, Buffer.from(body, 'utf8'));
-  await pro.produced('export');
+  // The saved message first: pro.produced shows the free-try count, and the newest status message is the one shown.
   if (kind === 'csv') vscode.window.setStatusBarMessage(`Saved ${res.rows} ${res.kind === 'lines' ? 'line items' : 'segments'} to ${baseName(target)}.`, 6000);
+  await pro.produced('export');
   await vscode.window.showTextDocument(target, { preview: false, viewColumn: vscode.ViewColumn.Beside });
   refreshPro();
 }

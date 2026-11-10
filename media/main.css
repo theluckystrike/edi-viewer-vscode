@@ -76,7 +76,9 @@ h3 { font-size: 13px; font-weight: 600; margin: 16px 0 6px; }
 .els tr:hover { background: var(--vscode-list-hoverBackground); }
 .els tr.sub td:first-child { padding-left: 14px; }
 .els tr.head td { font-weight: 600; }
-.els .val { word-break: break-all; }
+/* IDs never wrap; a value wraps only when it is longer than the column can hold (break-word, not break-all). */
+.els td:first-child { white-space: nowrap; }
+.els .val { overflow-wrap: anywhere; min-width: 9ch; }
 .raw { font-family: var(--vscode-editor-font-family); font-size: var(--vscode-editor-font-size, 12px); background: var(--vscode-textCodeBlock-background); padding: 6px 8px; white-space: pre-wrap; word-break: break-all; margin-top: 12px; }
 .probs { margin: 4px 0 8px; padding-left: 18px; }
 .probs li { cursor: pointer; margin: 2px 0; }

@@ -72,6 +72,7 @@ test('export: Escape keeps the try; 3 exports use the 3 tries; the 4th click sho
       await v.send({ type: 'tool', tool: i === 2 ? 'exportCsv' : 'exportJson' });
       assert.ok(fs.existsSync(out), `export ${i} written`);
       assert.strictEqual(s.state.get('ediViewer.proTrial').export, i);
+      assert.match(s.log.status.at(-1), new RegExp(`free try ${i} of 3`), 'the newest status message shows the try count (CSV too)');
     }
     assert.strictEqual(JSON.parse(fs.readFileSync(path.join(dir, 'out', 'po1.json'), 'utf8')).standard, 'X12');
     assert.match(fs.readFileSync(path.join(dir, 'out', 'po2.csv'), 'utf8'), /^transaction,control,document,line,quantity/);
