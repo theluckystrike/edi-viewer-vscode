@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "EDI (X12, EDIFACT)",
+  "scopeName": "source.edi",
+  "patterns": [
+    { "include": "#una" },
+    { "include": "#envelope" },
+    { "include": "#segment-id" },
+    { "include": "#release" },
+    { "include": "#terminator" },
+    { "include": "#separator" },
+    { "include": "#number" }
+  ],
+  "repository": {
+    "una": { "match": "^\\s*(UNA)(.{6})", "captures": { "1": { "name": "keyword.control.edi" }, "2": { "name": "constant.character.escape.edi" } } },
+    "envelope": { "match": "(?:^|(?<=[~'\\n]))\\s*(ISA|IEA|GS|GE|ST|SE|UNB|UNZ|UNG|UNE|UNH|UNT|UNS)(?=[*+|^~'\\n]|$)", "captures": { "1": { "name": "keyword.control.edi" } } },
+    "segment-id": { "match": "(?:^|(?<=[~'\\n]))\\s*([A-Z][A-Z0-9]{1,2})(?=[*+|^~'!\\n]|$)", "captures": { "1": { "name": "entity.name.tag.edi" } } },
+    "release": { "match": "\\?[+:'?*]", "name": "constant.character.escape.edi" },
+    "terminator": { "match": "[~']", "name": "punctuation.terminator.edi" },
+    "separator": { "match": "[*+|^:>]", "name": "punctuation.separator.edi" },
+    "number": { "match": "(?<=[*+:|^])-?\\d+(?:[.,]\\d+)?(?=[*+:|^~'\\n]|$)", "name": "constant.numeric.edi" }
+  }
+}

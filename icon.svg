@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect x="8" y="8" width="240" height="240" rx="40" fill="#14202B"/>
+  <rect x="8" y="8" width="240" height="240" rx="40" fill="none" stroke="#2F4A63" stroke-width="4"/>
+  <!-- an EDI document: segment rows, then a tree -->
+  <path d="M60 36 h104 l36 36 v148 a8 8 0 0 1 -8 8 h-132 a8 8 0 0 1 -8 -8 v-176 a8 8 0 0 1 8 -8 z" fill="#1C2D3C" stroke="#3E5C77" stroke-width="3"/>
+  <path d="M164 36 v28 a8 8 0 0 0 8 8 h28" fill="none" stroke="#3E5C77" stroke-width="3"/>
+  <rect x="68" y="56" width="80" height="26" rx="4" fill="#3794FF"/>
+  <text x="108" y="75" text-anchor="middle" font-family="Menlo, DejaVu Sans Mono, monospace" font-size="17" font-weight="700" fill="#FFFFFF">EDI</text>
+  <rect x="68" y="94" width="10" height="10" rx="2" fill="#B180D7"/>
+  <rect x="84" y="94" width="96" height="10" rx="3" fill="#B180D7"/>
+  <rect x="84" y="112" width="10" height="10" rx="2" fill="#4EC9B0"/>
+  <rect x="100" y="112" width="80" height="10" rx="3" fill="#4EC9B0"/>
+  <rect x="100" y="130" width="10" height="10" rx="2" fill="#D18616"/>
+  <rect x="116" y="130" width="64" height="10" rx="3" fill="#D18616"/>
+  <rect x="100" y="148" width="10" height="10" rx="2" fill="#D18616"/>
+  <rect x="116" y="148" width="52" height="10" rx="3" fill="#D18616"/>
+  <text x="68" y="200" font-family="Menlo, DejaVu Sans Mono, monospace" font-size="20" font-weight="700" fill="#9CDCFE">X12</text>
+  <text x="114" y="200" font-family="Menlo, DejaVu Sans Mono, monospace" font-size="20" font-weight="700" fill="#CE9178">~'</text>
+</svg>

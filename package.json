@@ -1,0 +1,436 @@
+{
+  "name": "zovo-edi-viewer",
+  "displayName": "EDI Viewer & X12 Viewer, EDIFACT Viewer (EDI Parser)",
+  "description": "EDI viewer, X12 viewer and EDIFACT viewer for VS Code: open .edi, .x12 and EDIFACT files as a tree of interchanges, transaction sets, loops and segments, with element names and code meanings. An EDI parser and validator for 850, 810, 856, 837, 835, ORDERS, INVOIC and DESADV: control numbers and counts checked, hover names in the text editor, format and minify. No network.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1B2A4A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/edi-viewer-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/edi-viewer-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/edi-viewer-vscode#readme",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Visualization",
+    "Programming Languages",
+    "Linters",
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "edi viewer",
+    "x12 viewer",
+    "edifact viewer",
+    "edi parser",
+    "x12",
+    "edifact",
+    "edi",
+    "x12 parser",
+    "edifact parser",
+    "edi validator",
+    "edi x12",
+    "edi 850",
+    "850",
+    "810",
+    "856",
+    "837",
+    "835",
+    "997",
+    "hipaa",
+    "orders",
+    "invoic",
+    "desadv",
+    "ansi x12",
+    "un/edifact",
+    "edi file"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onLanguage:edi"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "edi",
+        "aliases": [
+          "EDI (X12, EDIFACT)",
+          "EDI"
+        ],
+        "extensions": [
+          ".edi",
+          ".x12",
+          ".edifact",
+          ".edf",
+          ".850",
+          ".855",
+          ".810",
+          ".856",
+          ".997",
+          ".999",
+          ".820",
+          ".837",
+          ".835",
+          ".270",
+          ".271",
+          ".276",
+          ".277",
+          ".204",
+          ".214",
+          ".940",
+          ".945",
+          ".860",
+          ".846",
+          ".834"
+        ],
+        "firstLine": "^\\uFEFF?\\s*(ISA[*|^!~>]|UNA[:+.?* '\\n]|UNB\\+)",
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "edi",
+        "scopeName": "source.edi",
+        "path": "./syntaxes/edi.tmLanguage.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "ediViewer.tree",
+        "displayName": "EDI Viewer (tree, segments, problems)",
+        "selector": [
+          {
+            "filenamePattern": "*.edi"
+          },
+          {
+            "filenamePattern": "*.x12"
+          },
+          {
+            "filenamePattern": "*.edifact"
+          },
+          {
+            "filenamePattern": "*.edf"
+          },
+          {
+            "filenamePattern": "*.850"
+          },
+          {
+            "filenamePattern": "*.855"
+          },
+          {
+            "filenamePattern": "*.810"
+          },
+          {
+            "filenamePattern": "*.856"
+          },
+          {
+            "filenamePattern": "*.997"
+          },
+          {
+            "filenamePattern": "*.999"
+          },
+          {
+            "filenamePattern": "*.820"
+          },
+          {
+            "filenamePattern": "*.837"
+          },
+          {
+            "filenamePattern": "*.835"
+          },
+          {
+            "filenamePattern": "*.270"
+          },
+          {
+            "filenamePattern": "*.271"
+          },
+          {
+            "filenamePattern": "*.276"
+          },
+          {
+            "filenamePattern": "*.277"
+          },
+          {
+            "filenamePattern": "*.204"
+          },
+          {
+            "filenamePattern": "*.214"
+          },
+          {
+            "filenamePattern": "*.940"
+          },
+          {
+            "filenamePattern": "*.945"
+          },
+          {
+            "filenamePattern": "*.860"
+          },
+          {
+            "filenamePattern": "*.846"
+          },
+          {
+            "filenamePattern": "*.834"
+          },
+          {
+            "filenamePattern": "*"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "ediViewer.open",
+        "title": "Open in EDI Viewer",
+        "category": "EDI Viewer",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "ediViewer.openSample",
+        "title": "Open a sample X12 purchase order",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.openSampleText",
+        "title": "Open a sample 837 claim as text",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.openWalkthrough",
+        "title": "Get started",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.format",
+        "title": "Format EDI (one segment per line)",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.minify",
+        "title": "Minify EDI (one line)",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.exportJson",
+        "title": "Export EDI to JSON (Pro)",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.exportCsv",
+        "title": "Export EDI to CSV (Pro)",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.compare",
+        "title": "Compare two EDI files (Pro)",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.validateFolder",
+        "title": "Validate a folder of EDI files (Pro)",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.supportDeveloper",
+        "title": "Support the developer",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.moreViewers",
+        "title": "More free viewers",
+        "category": "EDI Viewer"
+      },
+      {
+        "command": "ediViewer.getPro",
+        "title": "Get Zovo Pro (USD 19 once, all 22 Zovo extensions)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "ediViewer.payWithPayPal",
+        "title": "Pay for Zovo Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "ediViewer.unlockWithSponsors",
+        "title": "I already paid: unlock with GitHub Sponsors",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "ediViewer.enterLicenseKey",
+        "title": "Enter Zovo Pro license key",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "ediViewer.removeLicense",
+        "title": "Remove Zovo Pro from this editor",
+        "category": "Zovo Pro"
+      },
+      {
+        "command": "ediViewer.payByCard",
+        "title": "Pay for Zovo Pro by card (USD 19)",
+        "category": "Zovo Pro"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "ediViewer.open",
+          "when": "resourceLangId == edi && activeCustomEditorId != 'ediViewer.tree'",
+          "group": "navigation@40"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "ediViewer.format",
+          "when": "editorLangId == edi",
+          "group": "1_modification@40"
+        },
+        {
+          "command": "ediViewer.minify",
+          "when": "editorLangId == edi",
+          "group": "1_modification@41"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "ediViewer.open",
+          "when": "!explorerResourceIsFolder",
+          "group": "navigation@40"
+        },
+        {
+          "command": "ediViewer.compare",
+          "when": "!explorerResourceIsFolder && config.ediViewer.showProTools",
+          "group": "7_modification@40"
+        },
+        {
+          "command": "ediViewer.validateFolder",
+          "when": "explorerResourceIsFolder && config.ediViewer.showProTools",
+          "group": "7_modification@41"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "ediViewer.format",
+          "when": "editorLangId == edi"
+        },
+        {
+          "command": "ediViewer.minify",
+          "when": "editorLangId == edi"
+        },
+        {
+          "command": "ediViewer.exportJson",
+          "when": "config.ediViewer.showProTools"
+        },
+        {
+          "command": "ediViewer.exportCsv",
+          "when": "config.ediViewer.showProTools"
+        },
+        {
+          "command": "ediViewer.compare",
+          "when": "config.ediViewer.showProTools"
+        },
+        {
+          "command": "ediViewer.validateFolder",
+          "when": "config.ediViewer.showProTools"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "EDI Viewer",
+      "properties": {
+        "ediViewer.showProTools": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Export, Compare and Validate folder buttons (Zovo Pro tools, 3 free tries each). Turn off to hide them."
+        },
+        "ediViewer.validate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Check EDI files in the text editor and show the problems (control numbers, counts, ISA field widths, mandatory elements) in the Problems panel."
+        },
+        "ediViewer.hover": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the segment and element name, and the meaning of a code, when the mouse rests on an EDI value in the text editor."
+        },
+        "ediViewer.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate, More free viewers and support links at the bottom of the viewer."
+        },
+        "ediViewer.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once, after a few days of use, whether you want to rate the extension. Never after an error."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "ediViewer.start",
+        "title": "EDI Viewer for X12 and EDIFACT",
+        "description": "Read X12 and EDIFACT files as a tree, with names for every segment and element.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open an EDI file in the viewer",
+            "description": "Right-click an .edi, .x12 or EDIFACT file and pick Open in EDI Viewer, or use the tree icon at the top of the text editor. The tree shows interchanges, groups, transaction sets, loops and segments.\n[Open a sample X12 purchase order](command:ediViewer.openSample)\n[Open a sample EDIFACT order](command:ediViewer.openSample?%22edifact%22)\n[Open a file...](command:ediViewer.open)",
+            "media": {
+              "markdown": "walkthrough/open.md"
+            }
+          },
+          {
+            "id": "text",
+            "title": "Names on hover in the text editor",
+            "description": "In the text editor, rest the mouse on a value to see its element name and the meaning of its code. Format EDI puts one segment on each line; Minify EDI puts the file back on one line.\n[Open a sample 837 claim as text](command:ediViewer.openSampleText)",
+            "media": {
+              "markdown": "walkthrough/text.md"
+            }
+          },
+          {
+            "id": "problems",
+            "title": "Control numbers and counts checked",
+            "description": "The Problems tab and the Problems panel list wrong control numbers, wrong segment and group counts, ISA fields with the wrong width, segments that do not belong to the transaction set and empty mandatory elements.\n[Open a sample 837 claim](command:ediViewer.openSample?%22claim%22)",
+            "media": {
+              "markdown": "walkthrough/problems.md"
+            }
+          },
+          {
+            "id": "zovo-related",
+            "title": "Files that often come with EDI files",
+            "description": "If your project also has binary files or SQLite databases, these free Zovo extensions open them. A link opens the extension page, and you choose there whether to install it.\n[Hex Viewer](command:extension.open?%5B%22zovo.zovo-hex-viewer%22%5D)\n[SQLite Viewer](command:extension.open?%5B%22zovo.sqlite-table-viewer%22%5D)",
+            "media": {
+              "markdown": "walkthrough/related.md"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node scripts/test.js",
+    "samples": "node scripts/make_samples.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "~1.90.0"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike/sponsorships?tier_id=679878"
+  }
+}
